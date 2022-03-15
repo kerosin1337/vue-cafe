@@ -32,7 +32,7 @@ export default {
   name: "add-user",
   data() {
     return {
-      show: true,
+      show: false,
         name: '',
         login: '',
         password: '',

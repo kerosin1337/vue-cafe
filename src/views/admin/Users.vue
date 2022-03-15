@@ -4,8 +4,8 @@
     <h1 class="text-center mb-5">Users</h1>
     <div class="container">
       <div :class="$style.add" class="d-flex align-items-center mb-5">
-        <i @click="openModal" class="fa-solid fa-plus"></i>
-        <p @click="openModal" class="m-0">New user</p>
+        <i @click="openAddUser" class="fa-solid fa-plus"></i>
+        <p @click="openAddUser" class="m-0">New user</p>
       </div>
       <div class="row row-cols-1" v-for="(user, index) in users" :key="index">
         <card
@@ -26,11 +26,11 @@ export default {
   name: "users-component",
   components: {
     Card,
-    AddUser,
+    AddUser
   },
   methods: {
     ...mapActions({ getUsers: "admin/users/getUsers" }),
-    openModal() {
+    openAddUser() {
         this.$refs.addUser.show = true
     }
   },
