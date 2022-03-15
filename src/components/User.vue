@@ -1,41 +1,48 @@
 <template>
-    <div v-if="show" :class="$style.forModal">
+  <div v-if="show" :class="$style.forModal">
     <div
       class="position-fixed top-50 start-50 translate-middle p-5"
       :class="$style.modal"
     >
       <div class="d-flex align-items-center justify-content-between mb-3">
-        <h2>Add an user</h2>
+        <h2>{{ user.name }} {{ user.surname }} {{ user.patronymic }}</h2>
         <i @click="close" class="fa-solid fa-xmark"></i>
       </div>
       <div>
-
+        <p>{{ user.status }}</p>
+        <p>{{ user.group }}</p>
+        <button @click="dismiss(user.id)" class="but">Dismiss</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
-    name: 'user-component',
-    data() {
-        return {
-            show: false
-        }
+  name: "user-component",
+  props: ["id", "user"],
+  data() {
+    return {
+      show: false,
+    };
+  },
+  methods: {
+    ...mapActions({ dismiss: "admin/dismiss/dismiss" }),
+    close() {
+      this.show = false;
     },
-    methods: {
-        close() {
-            this.show = false
-        }
-    }
-}
+  },
+};
 </script>
 <style module>
-    .modal {
+.modal {
+  min-width: 50%;
   background: #fff;
   border-radius: 25px;
   box-shadow: 0px 0px 50px -1px rgba(34, 60, 80, 0.5);
 }
-.modal h2 {
+.modal h2,
+p {
   color: var(--sherpa-blue);
 }
 .forModal {

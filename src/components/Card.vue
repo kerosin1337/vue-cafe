@@ -1,24 +1,32 @@
 <template>
-  <div @click="openUser" :class="$style.card">
-    <h2>{{ title }}</h2>
-    <p>{{ text1 }}</p>
-    <p>{{ text2 }}</p>
-    <user ref="user" />
+  <div>
+    <div @click="openUser" :class="$style.card">
+      <h2>{{ title }}</h2>
+      <p>{{ status }}</p>
+      <p>{{ group }}</p>
+    </div>
+    <user :user="user" ref="user" :id="id" />
   </div>
 </template>
 <script>
-import User from './User.vue'
+import User from "./User";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "card-component",
+  props: ["title", "status", "group", "id"],
   components: {
     User,
   },
-  props: ["title", "text1", "text2"],
   methods: {
-      openUser() {
-        this.$refs.user.show = true
-    }
-  }
+    ...mapActions({ getUser: "admin/user/getUser" }),
+    openUser() {
+      this.$refs.user.show = true;
+      this.getUser(this.id);
+    },
+  },
+  computed: {
+    ...mapGetters({ user: "admin/user/user" }),
+  },
 };
 </script>
 <style module>

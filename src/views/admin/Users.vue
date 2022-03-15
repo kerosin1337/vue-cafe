@@ -10,9 +10,10 @@
       <div class="row row-cols-1" v-for="(user, index) in users" :key="index">
         <card
           class="col mb-3"
+          :id="user.id"
           :title="user.name"
-          :text1="user.status"
-          :text2="user.group"
+          :status="user.status"
+          :group="user.group"
         />
       </div>
     </div>
@@ -22,17 +23,18 @@
 import { mapActions, mapGetters } from "vuex";
 import Card from "../../components/Card.vue";
 import AddUser from "../../components/AddUser.vue";
+
 export default {
   name: "users-component",
   components: {
     Card,
-    AddUser
+    AddUser,
   },
   methods: {
     ...mapActions({ getUsers: "admin/users/getUsers" }),
     openAddUser() {
-        this.$refs.addUser.show = true
-    }
+      this.$refs.addUser.show = true;
+    },
   },
   computed: {
     ...mapGetters({ users: "admin/users/users" }),

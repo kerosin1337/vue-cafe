@@ -1,13 +1,13 @@
 import axios from "axios";
 import { host } from "./../index";
 
-const users = () => ({
+const shifts = () => ({
   namespaced: true,
   state: {
-    users: [],
+    shifts: [],
   },
   actions: {
-    async getUsers(context) {
+    async getShifts(context) {
       const headers = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -15,21 +15,21 @@ const users = () => ({
       await axios({
         method: "get",
         headers,
-        url: `${host}/api-cafe/user`,
+        url: `${host}/api-cafe/work-shift`,
       })
-        .then((result) => (this.users = result.data.data))
+        .then((result) => (this.shifts = result.data))
         .catch((e) => (this.error = e.message));
-      context.commit("getUsers", this.users);
+      context.commit("getShifts", this.shifts);
     },
   },
   mutations: {
-    getUsers(state, data) {
-      state.users = data;
+    getShifts(state, data) {
+      state.shifts = data;
     },
   },
   getters: {
-    users: (state) => state.users,
+    shifts: (state) => state.shifts,
   },
 });
 
-export default users;
+export default shifts;

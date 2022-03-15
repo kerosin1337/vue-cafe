@@ -6,19 +6,15 @@
     </div>
 </template>
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
     name: 'log-out',
     methods: {
         ...mapActions({logoutAction: 'authorization/logout/logout'}),
-        ...mapMutations({delToken: 'authorization/logout/delToken'}),
         async logout() {
-           await this.delToken() 
+           await this.logoutAction() 
            this.$router.push('/')
         }
-    },
-    mounted() {
-
     }
 }
 </script>

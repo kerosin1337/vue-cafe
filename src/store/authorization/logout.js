@@ -18,7 +18,7 @@ const logout = () => ({
   mutations: () => ({
     delToken(state) {
       state.token = "";
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     },
   }),
 });

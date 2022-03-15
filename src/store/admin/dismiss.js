@@ -1,13 +1,13 @@
 import axios from "axios";
-import { host } from "./../index";
+import { host } from "..";
 
-const users = () => ({
+const dismiss = () => ({
   namespaced: true,
   state: {
-    users: [],
+    status: "",
   },
   actions: {
-    async getUsers(context) {
+    async dismiss(context, id) {
       const headers = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -15,21 +15,18 @@ const users = () => ({
       await axios({
         method: "get",
         headers,
-        url: `${host}/api-cafe/user`,
+        url: `${host}/api-cafe/user/${id}/to-dismiss`,
       })
-        .then((result) => (this.users = result.data.data))
+        .then((result) => (this.status = result.data.status))
         .catch((e) => (this.error = e.message));
-      context.commit("getUsers", this.users);
+      context.commit("dismiss", this.status);
     },
   },
   mutations: {
-    getUsers(state, data) {
-      state.users = data;
+    dismiss(state, data) {
+      state.status = data;
     },
-  },
-  getters: {
-    users: (state) => state.users,
   },
 });
 
-export default users;
+export default dismiss;

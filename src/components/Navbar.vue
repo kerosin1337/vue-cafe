@@ -33,8 +33,8 @@
               Admin
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background: var(--allports); border: none;">
-              <router-link to="/users" class="dropdown-item" href="#">Users</router-link>
-              <a class="dropdown-item" href="#">Another action</a>
+              <router-link to="/users" class="dropdown-item">Users</router-link>
+              <router-link to="/shifts" class="dropdown-item">Shifts</router-link>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
